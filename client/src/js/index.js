@@ -1,6 +1,6 @@
 import { Workbox } from "workbox-window";
 import Editor from "./editor";
-import "./database";
+import { initDb } from "./database";
 import "../css/style.css";
 
 // Images
@@ -37,3 +37,7 @@ if ("serviceWorker" in navigator) {
 } else {
   console.error("Service workers are not supported in this browser.");
 }
+
+window.addEventListener("load", function () {
+  initDb();
+});
