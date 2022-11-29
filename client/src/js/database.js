@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-const initdb = async () =>
+export const initDb = async () =>
   openDB("jate", 1, {
     upgrade(db) {
       if (db.objectStoreNames.contains("jate")) {
@@ -19,23 +19,23 @@ const initdb = async () =>
 export const putDb = async (content) => {
   console.log("PUT to the database");
 
-  // Create a connection to the database and specify the version we want to use.
+  // connection to the IndexedDB database
   const jateDb = await openDB("jate", 1);
 
-  // Create a new transaction and specify the store and data privileges.
+  // new transaction
   const tx = jateDb.transaction("jate", "readwrite");
 
-  // Open up the desired object store.
+  // open the store
   const store = tx.objectStore("jate");
 
-  // Use the .add() method on the store and pass in the content.
+  // .put method
   const request = store.put({
     value: content,
   });
 
-  // Get confirmation of the request.
+  // confirmation request.
   const result = await request;
-  console.log("data saved to the database", result);
+  console.log("data saved to the database", result[result.length - 1].value);
 };
 
 // TODO: Add logic for a method that gets all the content from the database
@@ -59,8 +59,6 @@ export const getDb = async () => {
 
   // confirmation request.
   const result = await request;
-  console.log("result.value", result);
-  return result;
+  console.log("result.value", result[result.length - 1].value);
+  return result[result.length - 1].value;
 };
-
-initdb();
