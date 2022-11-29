@@ -13,8 +13,28 @@ if ("serviceWorker" in navigator) {
   // Use the window load event to keep the page load performant
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js");
+
+    document.getElementById("logo-icon").src = Logo;
+
+    const buttonInstall = document.getElementById(buttonInstall);
   });
 }
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = "visible";
+
+  // install button event
+  buttonInstall.addEventListener("click", () => {
+    event.prompt();
+    buttonInstall.setAttribute("disabled", true);
+    buttonInstall.textContent = "Installed!";
+  });
+
+  window.addEventListener("appinstalled", (event) => {
+    console.log("👍", "appinstalled", event);
+  });
+});
 
 const main = document.querySelector("#main");
 main.innerHTML = "";

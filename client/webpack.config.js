@@ -26,6 +26,29 @@ module.exports = () => {
         swSrc: "./src-sw.js",
         swDest: "service-worker.js",
       }),
+      new WebpackPwaManifest({
+        name: "JustAnotherTextEditor",
+        short_name: "J.A.T.E",
+        description:
+          "Just Another Text Editor, J.A.T.E., is an progressive web application that allows you to store locally and remotely if connected online",
+        background_color: "#272822",
+        theme_color: "#31a9e1",
+        start_url: "./",
+        publicPath: "./",
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+          {
+            src: path.resolve("src/images/logo.png"),
+            size: "1024x1024",
+            destination: path.join("assets", "icons"),
+            purpose: "maskable",
+          },
+        ],
+      }),
     ],
     module: {
       rules: [
