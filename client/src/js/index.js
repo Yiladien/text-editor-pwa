@@ -22,7 +22,7 @@ if ("serviceWorker" in navigator) {
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
-  installBtn.style.visibility = "visible";
+  buttonInstall.style.visibility = "visible";
 
   // install button event
   buttonInstall.addEventListener("click", () => {
