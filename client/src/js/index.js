@@ -59,8 +59,8 @@ window.addEventListener("beforeinstallprompt", (event) => {
     buttonInstall.setAttribute("disabled", true);
     buttonInstall.textContent = "Installed!";
   });
+});
 
-  window.addEventListener("appinstalled", (event) => {
-    console.log("👍", "appinstalled", event);
-  });
+window.addEventListener("appinstalled", (event) => {
+  console.log("👍", "appinstalled", event);
 });
