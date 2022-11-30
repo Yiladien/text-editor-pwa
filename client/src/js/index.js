@@ -9,31 +9,9 @@ import Logo from "../images/logo.png";
 // Stylesheets
 import "../css/style.css";
 
-if ("serviceWorker" in navigator) {
-  // Use the window load event to keep the page load performant
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js");
-
-    document.getElementById("logo-icon").src = Logo;
-
-    const buttonInstall = document.getElementById(buttonInstall);
-  });
-}
-
-window.addEventListener("beforeinstallprompt", (event) => {
-  event.preventDefault();
-  buttonInstall.style.visibility = "visible";
-
-  // install button event
-  buttonInstall.addEventListener("click", () => {
-    event.prompt();
-    buttonInstall.setAttribute("disabled", true);
-    buttonInstall.textContent = "Installed!";
-  });
-
-  window.addEventListener("appinstalled", (event) => {
-    console.log("👍", "appinstalled", event);
-  });
+window.addEventListener("load", () => {
+  initDb();
+  document.getElementById("logo-icon").src = Logo;
 });
 
 const main = document.querySelector("#main");
@@ -65,6 +43,24 @@ if ("serviceWorker" in navigator) {
   console.error("Service workers are not supported in this browser.");
 }
 
-window.addEventListener("load", function () {
-  initDb();
+// window.addEventListener("load", function () {
+//   initDb();
+// });
+
+const buttonInstall = document.getElementById("buttonInstall");
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  buttonInstall.style.visibility = "visible";
+
+  // install button event
+  buttonInstall.addEventListener("click", () => {
+    event.prompt();
+    buttonInstall.setAttribute("disabled", true);
+    buttonInstall.textContent = "Installed!";
+  });
+
+  window.addEventListener("appinstalled", (event) => {
+    console.log("👍", "appinstalled", event);
+  });
 });
